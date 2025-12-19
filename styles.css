@@ -21,6 +21,130 @@ body {
     color: #ededed;
 }
 
+/* Dark mode - Sidebar */
+[data-theme="dark"] .sidebar a {
+    color: #999;
+}
+
+[data-theme="dark"] .sidebar a:hover {
+    color: #ededed;
+}
+
+/* Dark mode - Header */
+[data-theme="dark"] header {
+    border-bottom: 1px solid #2a2a2a;
+}
+
+[data-theme="dark"] header h1 {
+    color: #ededed;
+}
+
+[data-theme="dark"] .subtitle {
+    color: #b0b0b0;
+}
+
+/* Dark mode - Sections */
+[data-theme="dark"] section h2 {
+    color: #ededed;
+}
+
+[data-theme="dark"] section h3 {
+    color: #ededed;
+}
+
+[data-theme="dark"] section p {
+    color: #b0b0b0;
+}
+
+[data-theme="dark"] .period {
+    color: #666;
+}
+
+[data-theme="dark"] .description {
+    color: #b0b0b0;
+}
+
+/* Dark mode - Links */
+[data-theme="dark"] a {
+    color: #ededed;
+}
+
+[data-theme="dark"] section a {
+    color: #b0b0b0;
+}
+
+[data-theme="dark"] a:hover {
+    opacity: 0.8;
+}
+
+/* Dark mode - Project Cards */
+[data-theme="dark"] .project-card {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .project-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+    border-color: #3a3a3a;
+}
+
+[data-theme="dark"] .project-link {
+    color: #b0b0b0;
+}
+
+[data-theme="dark"] .project-link:hover {
+    color: #ededed;
+}
+
+[data-theme="dark"] .project-description {
+    color: #b0b0b0;
+}
+
+[data-theme="dark"] .tech-tag {
+    background: #1f1f1f;
+    color: #b0b0b0;
+}
+
+[data-theme="dark"] .project-card:hover .tech-tag {
+    background: #2a2a3a;
+    color: #8b8bff;
+}
+
+/* Dark mode - Footer */
+[data-theme="dark"] footer {
+    border-top: 1px solid #2a2a2a;
+}
+
+[data-theme="dark"] footer p {
+    color: #b0b0b0;
+}
+
+[data-theme="dark"] .footer-message {
+    color: #ededed;
+}
+
+[data-theme="dark"] .footer-btn {
+    border: 1px solid #2a2a2a;
+    color: #b0b0b0;
+    background: #141414;
+}
+
+[data-theme="dark"] .footer-btn:hover {
+    border-color: #ededed;
+    color: #ededed;
+}
+
+/* Dark mode - GitHub icon stays black */
+[data-theme="dark"] .footer-btn-github,
+[data-theme="dark"] .footer-btn-github:hover {
+    color: #ededed !important;
+}
+
+[data-theme="dark"] .footer-btn-github .footer-icon {
+    fill: #ededed !important;
+}
+
 /* Sidebar Navigation */
 .sidebar {
     position: fixed;
