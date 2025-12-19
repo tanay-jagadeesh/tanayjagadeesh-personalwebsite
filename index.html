@@ -50,7 +50,7 @@
             transition: transform 0.3s ease;
         }
 
-        /* Gradient trail cursor - covers large area */
+        /* Gradient trail cursor - covers large area with dynamic patterns */
         .cursor-gradient {
             position: fixed;
             width: 300px;
@@ -69,22 +69,62 @@
         .cursor-gradient.visible {
             opacity: 0.8;
             transition: opacity 0.3s ease-in, width 0.3s ease, height 0.3s ease;
+            animation: rotateGradient 8s linear infinite, pulseGradient 3s ease-in-out infinite;
         }
         
         .cursor-gradient.moving {
             width: 450px;
             height: 450px;
+            animation: rotateGradient 6s linear infinite, pulseGradient 2s ease-in-out infinite, flowPattern 4s ease-in-out infinite;
         }
         
         .cursor-gradient.hover {
             width: 500px;
             height: 500px;
             opacity: 1;
+            animation: rotateGradient 5s linear infinite, pulseGradient 1.5s ease-in-out infinite;
         }
         
         .cursor-gradient.moving.hover {
             width: 600px;
             height: 600px;
+            animation: rotateGradient 4s linear infinite, pulseGradient 1s ease-in-out infinite, flowPattern 3s ease-in-out infinite;
+        }
+        
+        @keyframes rotateGradient {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) rotate(180deg) scale(1.1);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg) scale(1);
+            }
+        }
+        
+        @keyframes pulseGradient {
+            0%, 100% {
+                filter: blur(50px);
+            }
+            50% {
+                filter: blur(60px);
+            }
+        }
+        
+        @keyframes flowPattern {
+            0%, 100% {
+                background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, rgba(139, 92, 246, 0.4) 30%, rgba(59, 130, 246, 0.2) 50%, rgba(139, 92, 246, 0.1) 70%, transparent 100%);
+            }
+            25% {
+                background: radial-gradient(ellipse 120% 80%, rgba(139, 92, 246, 0.6) 0%, rgba(59, 130, 246, 0.4) 30%, rgba(139, 92, 246, 0.2) 50%, rgba(59, 130, 246, 0.1) 70%, transparent 100%);
+            }
+            50% {
+                background: radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, rgba(139, 92, 246, 0.5) 30%, rgba(59, 130, 246, 0.3) 50%, rgba(139, 92, 246, 0.15) 70%, transparent 100%);
+            }
+            75% {
+                background: radial-gradient(ellipse 80% 120%, rgba(139, 92, 246, 0.6) 0%, rgba(59, 130, 246, 0.4) 30%, rgba(139, 92, 246, 0.2) 50%, rgba(59, 130, 246, 0.1) 70%, transparent 100%);
+            }
         }
     </style>
 </head>
