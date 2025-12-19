@@ -17,7 +17,7 @@ body {
 }
 
 [data-theme="dark"] body {
-    background: linear-gradient(to bottom, #0a0a0a, #141414);
+    background: linear-gradient(to bottom, #0a0a0a 0%, #0f0f0f 25%, #141414 50%, #1a1a1a 75%, #1f1f1f 100%);
     color: #ededed;
 }
 
