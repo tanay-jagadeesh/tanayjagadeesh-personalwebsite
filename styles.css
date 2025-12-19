@@ -221,6 +221,9 @@ footer {
     padding-top: 24px;
     border-top: 1px solid #e5e5e5;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 footer p {
@@ -229,10 +232,12 @@ footer p {
 }
 
 .footer-message {
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 24px;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 32px;
     text-align: center;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 footer a {
@@ -269,28 +274,34 @@ footer a {
 }
 
 /* Colored icons for social links */
+.footer-btn-github,
+.footer-btn-github:hover {
+    color: #000 !important;
+}
+
 .footer-btn-github .footer-icon {
-    color: #000;
+    fill: #000 !important;
+    stroke: none;
+}
+
+.footer-btn-linkedin,
+.footer-btn-linkedin:hover {
+    color: #0077b5 !important;
 }
 
 .footer-btn-linkedin .footer-icon {
-    color: #0077b5;
+    fill: #0077b5 !important;
+    stroke: none;
+}
+
+.footer-btn-instagram,
+.footer-btn-instagram:hover {
+    color: #E4405F !important;
 }
 
 .footer-btn-instagram .footer-icon {
-    color: #E4405F;
-}
-
-.footer-btn-github:hover .footer-icon {
-    color: #000;
-}
-
-.footer-btn-linkedin:hover .footer-icon {
-    color: #0077b5;
-}
-
-.footer-btn-instagram:hover .footer-icon {
-    color: #E4405F;
+    fill: #E4405F !important;
+    stroke: none;
 }
 
 /* Responsive */
