@@ -232,7 +232,7 @@ footer p {
     font-size: 15px;
     color: #666;
     margin-bottom: 24px;
-    font-style: italic;
+    text-align: center;
 }
 
 footer a {
@@ -266,6 +266,31 @@ footer a {
 .footer-icon {
     width: 16px;
     height: 16px;
+}
+
+/* Colored icons for social links */
+.footer-btn-github .footer-icon {
+    color: #000;
+}
+
+.footer-btn-linkedin .footer-icon {
+    color: #0077b5;
+}
+
+.footer-btn-instagram .footer-icon {
+    color: #E4405F;
+}
+
+.footer-btn-github:hover .footer-icon {
+    color: #000;
+}
+
+.footer-btn-linkedin:hover .footer-icon {
+    color: #0077b5;
+}
+
+.footer-btn-instagram:hover .footer-icon {
+    color: #E4405F;
 }
 
 /* Responsive */
