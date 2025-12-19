@@ -352,7 +352,7 @@
             const glow = document.getElementById('cursorGlow');
             
             if (!dot || !glow) {
-                console.error('Cursor elements not found');
+                console.error('Cursor elements not found', { dot, glow });
                 return;
             }
             
@@ -364,15 +364,19 @@
             let glowY = mouseY;
             let isHovering = false;
             let isMoving = false;
-            let lastMoveTime = 0;
+            let lastMoveTime = Date.now();
             let targetX = mouseX;
             let targetY = mouseY;
 
-            // Initialize positions
+            // Initialize positions and show cursor
             dot.style.left = mouseX + 'px';
             dot.style.top = mouseY + 'px';
             glow.style.left = mouseX + 'px';
             glow.style.top = mouseY + 'px';
+            
+            // Show cursor immediately
+            dot.classList.add('visible');
+            glow.classList.add('visible');
 
             // Get all interactive elements for magnetic effect
             const getInteractiveElements = () => {
