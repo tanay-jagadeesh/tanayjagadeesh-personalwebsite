@@ -61,13 +61,14 @@
             z-index: 9999;
             transform: translate(-50%, -50%);
             filter: blur(50px);
-            transition: opacity 0.2s ease;
+            transition: opacity 1.5s ease-out;
             opacity: 0;
             will-change: transform, opacity;
         }
         
         .cursor-gradient.visible {
             opacity: 0.8;
+            transition: opacity 0.3s ease-in;
         }
         
         .cursor-gradient.hover {
@@ -209,6 +210,7 @@
         </section>
 
         <footer>
+            <p class="footer-message">let's connect — always open to building something together</p>
             <div class="footer-links">
                 <a href="mailto:t2jagade@uwaterloo.ca" class="footer-btn">
                     <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -304,7 +306,7 @@
             });
         })();
 
-        // Gradient trail that follows cursor - covers large area
+        // Magnetic gradient cursor with gradual fade
         (function() {
             const gradient = document.getElementById('cursorGradient');
             
@@ -320,10 +322,27 @@
             let isHovering = false;
             let isMoving = false;
             let lastMoveTime = 0;
+            let targetX = mouseX;
+            let targetY = mouseY;
 
             // Initialize position
             gradient.style.left = mouseX + 'px';
             gradient.style.top = mouseY + 'px';
+
+            // Get all interactive elements for magnetic effect
+            const getInteractiveElements = () => {
+                return Array.from(document.querySelectorAll('a, button, .project-card, .item, .footer-btn, .project-link'));
+            };
+
+            const getElementCenter = (element) => {
+                const rect = element.getBoundingClientRect();
+                return {
+                    x: rect.left + rect.width / 2,
+                    y: rect.top + rect.height / 2,
+                    width: rect.width,
+                    height: rect.height
+                };
+            };
 
             const updateMouse = (e) => {
                 mouseX = e.clientX;
@@ -356,16 +375,54 @@
             };
 
             const animate = () => {
-                // Fade instantly when cursor stops
+                // Gradually fade out when cursor stops (after 1 second of no movement)
                 const timeSinceMove = Date.now() - lastMoveTime;
-                if (timeSinceMove > 50 && isMoving) {
+                if (timeSinceMove > 1000 && isMoving) {
                     isMoving = false;
                     gradient.classList.remove('visible');
                 }
                 
-                // Smooth trailing effect - covers large area as it follows
-                gradientX += (mouseX - gradientX) * 0.1;
-                gradientY += (mouseY - gradientY) * 0.1;
+                // Magnetic attraction to interactive elements
+                const interactiveElements = getInteractiveElements();
+                let magneticX = mouseX;
+                let magneticY = mouseY;
+                let closestDistance = Infinity;
+                let closestElement = null;
+
+                interactiveElements.forEach(element => {
+                    const center = getElementCenter(element);
+                    const distance = Math.sqrt(
+                        Math.pow(mouseX - center.x, 2) + 
+                        Math.pow(mouseY - center.y, 2)
+                    );
+                    
+                    // Magnetic radius - adjust for stronger/weaker effect
+                    const magneticRadius = Math.max(center.width, center.height) * 1.5;
+                    
+                    if (distance < magneticRadius && distance < closestDistance) {
+                        closestDistance = distance;
+                        closestElement = center;
+                    }
+                });
+
+                // Apply magnetic pull if near an interactive element
+                if (closestElement) {
+                    const pullStrength = 1 - (closestDistance / (Math.max(closestElement.width, closestElement.height) * 1.5));
+                    const pullAmount = pullStrength * 0.3; // Adjust for stronger/weaker pull
+                    
+                    magneticX = mouseX + (closestElement.x - mouseX) * pullAmount;
+                    magneticY = mouseY + (closestElement.y - mouseY) * pullAmount;
+                } else {
+                    magneticX = mouseX;
+                    magneticY = mouseY;
+                }
+
+                // Smooth trailing effect with magnetic influence
+                targetX = magneticX;
+                targetY = magneticY;
+                
+                gradientX += (targetX - gradientX) * 0.15;
+                gradientY += (targetY - gradientY) * 0.15;
 
                 gradient.style.left = gradientX + 'px';
                 gradient.style.top = gradientY + 'px';
