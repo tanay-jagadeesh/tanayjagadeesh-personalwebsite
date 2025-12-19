@@ -50,51 +50,30 @@
             transition: transform 0.3s ease;
         }
 
-        /* Enhanced gradient cursor with multiple layers */
+        /* Gradient trail cursor - covers large area */
         .cursor-gradient {
             position: fixed;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.7) 0%, rgba(139, 92, 246, 0.5) 25%, rgba(59, 130, 246, 0.3) 45%, rgba(139, 92, 246, 0.15) 65%, transparent 85%);
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, rgba(139, 92, 246, 0.4) 30%, rgba(59, 130, 246, 0.2) 50%, rgba(139, 92, 246, 0.1) 70%, transparent 100%);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            filter: blur(60px);
+            filter: blur(50px);
+            transition: opacity 0.2s ease;
             opacity: 0;
-            will-change: transform, opacity, width, height;
-            transition: opacity 0.15s ease, width 0.3s ease, height 0.3s ease;
+            will-change: transform, opacity;
         }
         
         .cursor-gradient.visible {
-            opacity: 0.9;
+            opacity: 0.8;
         }
         
         .cursor-gradient.hover {
-            width: 400px;
-            height: 400px;
+            width: 350px;
+            height: 350px;
             opacity: 1;
-            filter: blur(70px);
-        }
-        
-        /* Secondary trailing layer for depth */
-        .cursor-gradient-trail {
-            position: fixed;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, rgba(59, 130, 246, 0.2) 40%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            filter: blur(40px);
-            opacity: 0;
-            will-change: transform, opacity;
-            transition: opacity 0.2s ease;
-        }
-        
-        .cursor-gradient-trail.visible {
-            opacity: 0.6;
         }
     </style>
 </head>
@@ -114,7 +93,6 @@
         <a href="#experience">experience</a>
         <a href="#projects">projects</a>
         <a href="life.html">life</a>
-        <a href="#contact">contact</a>
     </nav>
 
     <div class="container">
@@ -230,35 +208,6 @@
             </div>
         </section>
 
-        <section id="contact" class="fade-in">
-            <h2>contact</h2>
-            <p>feel free to reach out if you'd like to connect or collaborate.</p>
-            
-            <form id="contactForm" class="contact-form">
-                <div class="form-group">
-                    <label for="name">name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">message</label>
-                    <textarea id="message" name="message" rows="6" required></textarea>
-                </div>
-                
-                <button type="submit" class="submit-btn">
-                    <span class="btn-text">send message</span>
-                    <span class="btn-loading" style="display: none;">sending...</span>
-                </button>
-                
-                <div id="formMessage" class="form-message" style="display: none;"></div>
-            </form>
-        </section>
-
         <footer>
             <div class="footer-links">
                 <a href="mailto:t2jagade@uwaterloo.ca" class="footer-btn">
@@ -290,9 +239,8 @@
         </footer>
     </div>
 
-    <!-- Enhanced gradient cursor with trailing effect -->
+    <!-- Gradient trail cursor -->
     <div class="cursor-gradient" id="cursorGradient"></div>
-    <div class="cursor-gradient-trail" id="cursorTrail"></div>
 
     <script>
         // Dark mode toggle
@@ -356,13 +304,12 @@
             });
         })();
 
-        // Enhanced gradient cursor with trailing effect
+        // Gradient trail that follows cursor - covers large area
         (function() {
             const gradient = document.getElementById('cursorGradient');
-            const trail = document.getElementById('cursorTrail');
             
-            if (!gradient || !trail) {
-                console.error('Cursor elements not found');
+            if (!gradient) {
+                console.error('Cursor gradient not found');
                 return;
             }
             
@@ -370,41 +317,23 @@
             let mouseY = window.innerHeight / 2;
             let gradientX = mouseX;
             let gradientY = mouseY;
-            let trailX = mouseX;
-            let trailY = mouseY;
             let isHovering = false;
             let isMoving = false;
             let lastMoveTime = 0;
-            let velocityX = 0;
-            let velocityY = 0;
-            let lastMouseX = mouseX;
-            let lastMouseY = mouseY;
 
-            // Initialize positions
+            // Initialize position
             gradient.style.left = mouseX + 'px';
             gradient.style.top = mouseY + 'px';
-            trail.style.left = mouseX + 'px';
-            trail.style.top = mouseY + 'px';
 
             const updateMouse = (e) => {
-                lastMouseX = mouseX;
-                lastMouseY = mouseY;
                 mouseX = e.clientX;
                 mouseY = e.clientY;
-                
-                // Calculate velocity for smoother animation
-                velocityX = mouseX - lastMouseX;
-                velocityY = mouseY - lastMouseY;
-                
                 isMoving = true;
                 lastMoveTime = Date.now();
                 
-                // Show gradients when moving
+                // Show gradient when moving
                 if (!gradient.classList.contains('visible')) {
                     gradient.classList.add('visible');
-                }
-                if (!trail.classList.contains('visible')) {
-                    trail.classList.add('visible');
                 }
             };
 
@@ -427,31 +356,19 @@
             };
 
             const animate = () => {
-                // Fade when cursor stops moving
+                // Fade instantly when cursor stops
                 const timeSinceMove = Date.now() - lastMoveTime;
-                if (timeSinceMove > 100 && isMoving) {
+                if (timeSinceMove > 50 && isMoving) {
                     isMoving = false;
                     gradient.classList.remove('visible');
-                    trail.classList.remove('visible');
                 }
                 
-                // Dynamic easing based on velocity for more responsive feel
-                const speed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
-                const easeFactor = Math.min(0.15 + (speed * 0.001), 0.25);
-                const trailEaseFactor = easeFactor * 0.6;
-                
-                // Main gradient follows cursor with dynamic easing
-                gradientX += (mouseX - gradientX) * easeFactor;
-                gradientY += (mouseY - gradientY) * easeFactor;
-                
-                // Trail follows with more lag for depth effect
-                trailX += (mouseX - trailX) * trailEaseFactor;
-                trailY += (mouseY - trailY) * trailEaseFactor;
+                // Smooth trailing effect - covers large area as it follows
+                gradientX += (mouseX - gradientX) * 0.1;
+                gradientY += (mouseY - gradientY) * 0.1;
 
                 gradient.style.left = gradientX + 'px';
                 gradient.style.top = gradientY + 'px';
-                trail.style.left = trailX + 'px';
-                trail.style.top = trailY + 'px';
 
                 requestAnimationFrame(animate);
             };
@@ -462,63 +379,6 @@
             
             // Start animation
             animate();
-        })();
-
-        // Contact form handling
-        (function() {
-            const form = document.getElementById('contactForm');
-            const formMessage = document.getElementById('formMessage');
-            const submitBtn = form.querySelector('.submit-btn');
-            const btnText = submitBtn.querySelector('.btn-text');
-            const btnLoading = submitBtn.querySelector('.btn-loading');
-
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                // Disable form and show loading state
-                submitBtn.disabled = true;
-                btnText.style.display = 'none';
-                btnLoading.style.display = 'inline';
-                formMessage.style.display = 'none';
-
-                // Get form data
-                const formData = new FormData(form);
-                const data = {
-                    name: formData.get('name'),
-                    email: formData.get('email'),
-                    message: formData.get('message')
-                };
-
-                try {
-                    // Using Formspree - replace with your Formspree endpoint
-                    // Sign up at https://formspree.io to get your endpoint
-                    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data)
-                    });
-
-                    if (response.ok) {
-                        formMessage.textContent = 'thanks for reaching out! i\'ll get back to you soon.';
-                        formMessage.className = 'form-message success';
-                        formMessage.style.display = 'block';
-                        form.reset();
-                    } else {
-                        throw new Error('Form submission failed');
-                    }
-                } catch (error) {
-                    formMessage.textContent = 'something went wrong. please try again or email me directly at t2jagade@uwaterloo.ca';
-                    formMessage.className = 'form-message error';
-                    formMessage.style.display = 'block';
-                } finally {
-                    // Re-enable form
-                    submitBtn.disabled = false;
-                    btnText.style.display = 'inline';
-                    btnLoading.style.display = 'none';
-                }
-            });
         })();
     </script>
 </body>
