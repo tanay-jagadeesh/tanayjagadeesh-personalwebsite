@@ -71,25 +71,16 @@ header h1 {
     color: #666;
     font-weight: 400;
     letter-spacing: 0.3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.subtitle-with-logo {
-    display: flex;
-    align-items: center;
-    gap: 6px;
 }
 
 .subtitle-logo {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     object-fit: contain;
     flex-shrink: 0;
-    display: block;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
 }
 
 .subtitle-separator {
