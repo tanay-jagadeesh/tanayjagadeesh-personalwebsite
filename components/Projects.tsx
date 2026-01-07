@@ -2,6 +2,17 @@
 
 const projects = [
   {
+    title: "Signature Forgery Detection [Currently Building]",
+    description: "Deep learning system for detecting forged signatures using convolutional neural networks with PyTorch, achieving high accuracy in distinguishing authentic from fraudulent signatures.",
+    tech: ["Python", "PyTorch", "CNN", "Computer Vision"],
+    github: "https://github.com/tanay-jagadeesh/signature-forgery-detection",
+    highlights: [
+      "Convolutional neural network architecture",
+      "Deep learning-based forgery detection",
+      "Computer vision techniques"
+    ]
+  },
+  {
     title: "Stock Market News & Sentiment Analyzer",
     description: "A comprehensive API built with yfinance and FastAPI that aggregates stock market news and performs sentiment analysis to help investors make data-driven decisions.",
     tech: ["Python", "FastAPI", "yfinance", "NLP", "Sentiment Analysis"],
