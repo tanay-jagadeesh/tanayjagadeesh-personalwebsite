@@ -15,8 +15,7 @@ export default function About() {
           </p>
 
           <p className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            Currently, I'm building <span className="text-purple-400 font-semibold">real-time payment processing infrastructure</span> at Verrin,
-            coding orbital mechanics software at UW Orbital, and constantly exploring the frontiers of
+            Currently, I'm coding orbital mechanics software at UW Orbital, and constantly exploring the frontiers of
             machine learning, data engineering, and cloud technologies.
           </p>
 

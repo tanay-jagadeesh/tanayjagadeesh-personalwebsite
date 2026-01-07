@@ -2,19 +2,6 @@
 
 const experiences = [
   {
-    title: "Software Engineer",
-    company: "Verrin",
-    type: "Permanent Part-time",
-    period: "Dec 2025 - Present",
-    location: "Sydney, NSW, Australia (Remote)",
-    description: "Building real-time payment processing infrastructure",
-    highlights: [
-      "Architecting scalable payment processing systems",
-      "Implementing real-time transaction monitoring",
-      "Optimizing infrastructure for high-throughput operations"
-    ]
-  },
-  {
     title: "Software Developer",
     company: "UW Orbital",
     type: "Permanent Part-time",
