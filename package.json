@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "serve": "python3 -m http.server 8000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
