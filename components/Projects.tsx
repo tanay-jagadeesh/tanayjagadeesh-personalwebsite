@@ -3,9 +3,9 @@
 const projects = [
   {
     title: "Signature Forgery Detection",
-    description: "CNN-based binary classifier detecting forged signatures using PyTorch with transfer learning and data augmentation techniques.",
-    tech: ["Python", "PyTorch", "CNN", "torchvision", "Computer Vision"],
-    github: "https://github.com/tanay-jagadeesh/signature-forgery-detection",
+    description: "Deep learning system for detecting forged signatures using convolutional neural networks.",
+    tech: ["Python", "PyTorch", "CNN", "Computer Vision"],
+    github: "https://github.com/tanay-jagadeesh/signature-forge-or-not",
     highlights: [
       "Convolutional neural network architecture",
       "Transfer learning implementation",
