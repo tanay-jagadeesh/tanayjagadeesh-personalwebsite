@@ -12,12 +12,12 @@
         const SIM_RESOLUTION = 128;
         const DYE_RESOLUTION = 1440;
         const CAPTURE_RESOLUTION = 512;
-        const DENSITY_DISSIPATION = 3.5;
-        const VELOCITY_DISSIPATION = 2;
+        const DENSITY_DISSIPATION = 1.5;  // Reduced from 3.5 - makes effect last longer
+        const VELOCITY_DISSIPATION = 1.2;  // Reduced from 2 - makes velocity last longer
         const PRESSURE = 0.1;
         const PRESSURE_ITERATIONS = 20;
         const CURL = 3;
-        const SPLAT_RADIUS = 0.2;
+        const SPLAT_RADIUS = 0.35;  // Increased from 0.2 - covers larger area
         const SPLAT_FORCE = 6000;
         const SHADING = true;
         const COLOR_UPDATE_SPEED = 10;

@@ -47,6 +47,18 @@
             transition: transform 0.3s ease;
         }
 
+        /* Fluid cursor canvas */
+        #fluid-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            display: block;
+        }
+
         /* Photo gallery styles */
         .photo-gallery {
             margin-bottom: 80px;
@@ -555,6 +567,10 @@
             }
         })();
     </script>
+    
+    <!-- Fluid cursor canvas -->
+    <canvas id="fluid-cursor"></canvas>
+    <script src="fluid-cursor.js"></script>
 </body>
 </html>
 
