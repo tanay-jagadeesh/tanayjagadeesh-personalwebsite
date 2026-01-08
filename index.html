@@ -50,99 +50,16 @@
             transition: transform 0.3s ease;
         }
 
-        /* Gradient trail cursor with morphing effects - now seasonal */
-        .cursor-gradient {
+        /* Fluid cursor canvas */
+        #fluid-cursor {
             position: fixed;
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, rgba(139, 92, 246, 0.4) 30%, rgba(59, 130, 246, 0.2) 50%, rgba(139, 92, 246, 0.1) 70%, transparent 100%);
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
             z-index: 9999;
-            transform: translate(-50%, -50%);
-            filter: blur(45px);
-            transition: opacity 5s ease-out, width 0.3s ease, height 0.3s ease, background 0.5s ease;
-            opacity: 0;
-            will-change: transform, opacity, width, height;
-        }
-        
-        .cursor-gradient.visible {
-            opacity: 0.8;
-            transition: opacity 0.3s ease-in, width 0.3s ease, height 0.3s ease;
-            animation: rotateGradient 8s linear infinite, pulseGradient 3s ease-in-out infinite;
-        }
-        
-        .cursor-gradient.moving {
-            width: 320px;
-            height: 320px;
-            animation: rotateGradient 6s linear infinite, pulseGradient 2s ease-in-out infinite, flowPattern 3s ease-in-out infinite, morphSize 4s ease-in-out infinite;
-        }
-        
-        .cursor-gradient.hover {
-            width: 340px;
-            height: 340px;
-            opacity: 1;
-            animation: rotateGradient 5s linear infinite, pulseGradient 1.5s ease-in-out infinite;
-        }
-        
-        .cursor-gradient.moving.hover {
-            width: 360px;
-            height: 360px;
-            animation: rotateGradient 4s linear infinite, pulseGradient 1s ease-in-out infinite, flowPattern 2.5s ease-in-out infinite, morphSize 3s ease-in-out infinite;
-        }
-        
-        @keyframes rotateGradient {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg) scale(1);
-            }
-            50% {
-                transform: translate(-50%, -50%) rotate(180deg) scale(1.1);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg) scale(1);
-            }
-        }
-        
-        @keyframes pulseGradient {
-            0%, 100% {
-                filter: blur(50px);
-            }
-            50% {
-                filter: blur(60px);
-            }
-        }
-        
-        @keyframes flowPattern {
-            0% {
-                background: var(--seasonal-gradient-0, radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, rgba(139, 92, 246, 0.4) 30%, rgba(59, 130, 246, 0.2) 50%, rgba(139, 92, 246, 0.1) 70%, transparent 100%));
-            }
-            16.66% {
-                background: var(--seasonal-gradient-1, radial-gradient(ellipse 150% 70%, rgba(139, 92, 246, 0.7) 0%, rgba(59, 130, 246, 0.5) 25%, rgba(139, 92, 246, 0.3) 45%, rgba(59, 130, 246, 0.15) 65%, transparent 85%));
-            }
-            33.33% {
-                background: var(--seasonal-gradient-2, radial-gradient(ellipse 70% 150%, rgba(59, 130, 246, 0.7) 0%, rgba(139, 92, 246, 0.5) 25%, rgba(59, 130, 246, 0.3) 45%, rgba(139, 92, 246, 0.15) 65%, transparent 85%));
-            }
-            50% {
-                background: var(--seasonal-gradient-3, radial-gradient(circle, rgba(139, 92, 246, 0.6) 0%, rgba(59, 130, 246, 0.5) 30%, rgba(139, 92, 246, 0.35) 50%, rgba(59, 130, 246, 0.2) 70%, transparent 100%));
-            }
-            66.66% {
-                background: var(--seasonal-gradient-4, radial-gradient(ellipse 130% 90%, rgba(59, 130, 246, 0.65) 0%, rgba(139, 92, 246, 0.45) 28%, rgba(59, 130, 246, 0.25) 48%, rgba(139, 92, 246, 0.12) 68%, transparent 88%));
-            }
-            83.33% {
-                background: var(--seasonal-gradient-5, radial-gradient(ellipse 90% 130%, rgba(139, 92, 246, 0.65) 0%, rgba(59, 130, 246, 0.45) 28%, rgba(139, 92, 246, 0.25) 48%, rgba(59, 130, 246, 0.12) 68%, transparent 88%));
-            }
-            100% {
-                background: var(--seasonal-gradient-0, radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, rgba(139, 92, 246, 0.4) 30%, rgba(59, 130, 246, 0.2) 50%, rgba(139, 92, 246, 0.1) 70%, transparent 100%));
-            }
-        }
-        
-        @keyframes morphSize {
-            0%, 100% {
-                transform: translate(-50%, -50%) scale(1);
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.15);
-            }
+            display: block;
         }
     </style>
     <style id="seasonal-inline-styles"></style>
@@ -360,9 +277,10 @@
         </footer>
     </div>
 
-    <!-- Gradient trail cursor with morphing effects -->
-    <div class="cursor-gradient" id="cursorGradient"></div>
+    <!-- Fluid cursor canvas -->
+    <canvas id="fluid-cursor"></canvas>
 
+    <script src="fluid-cursor.js"></script>
     <script>
         // Seasonal Theme Detection and Application
         (function() {
@@ -718,148 +636,6 @@
             });
         })();
 
-        // Magnetic gradient cursor with morphing effects
-        (function() {
-            const gradient = document.getElementById('cursorGradient');
-            
-            if (!gradient) {
-                console.error('Cursor gradient not found');
-                return;
-            }
-            
-            let mouseX = window.innerWidth / 2;
-            let mouseY = window.innerHeight / 2;
-            let gradientX = mouseX;
-            let gradientY = mouseY;
-            let isHovering = false;
-            let isMoving = false;
-            let lastMoveTime = Date.now();
-            let targetX = mouseX;
-            let targetY = mouseY;
-
-            // Initialize position
-            gradient.style.left = mouseX + 'px';
-            gradient.style.top = mouseY + 'px';
-
-            // Get all interactive elements for magnetic effect
-            const getInteractiveElements = () => {
-                return Array.from(document.querySelectorAll('a, button, .project-card, .item, .footer-btn, .project-link'));
-            };
-
-            const getElementCenter = (element) => {
-                const rect = element.getBoundingClientRect();
-                return {
-                    x: rect.left + rect.width / 2,
-                    y: rect.top + rect.height / 2,
-                    width: rect.width,
-                    height: rect.height
-                };
-            };
-
-            const updateMouse = (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                isMoving = true;
-                lastMoveTime = Date.now();
-                
-                // Show gradient when moving
-                if (!gradient.classList.contains('visible')) {
-                    gradient.classList.add('visible');
-                }
-                
-                // Add moving class for larger trail
-                if (!gradient.classList.contains('moving')) {
-                    gradient.classList.add('moving');
-                }
-            };
-
-            const checkHover = (e) => {
-                const target = e.target;
-                const interactive = target.tagName === 'A' || 
-                                   target.tagName === 'BUTTON' || 
-                                   target.closest('a') !== null || 
-                                   target.closest('button') !== null ||
-                                   window.getComputedStyle(target).cursor === 'pointer';
-                
-                if (interactive !== isHovering) {
-                    isHovering = interactive;
-                    if (isHovering) {
-                        gradient.classList.add('hover');
-                    } else {
-                        gradient.classList.remove('hover');
-                    }
-                }
-            };
-
-            const animate = () => {
-                // Gradually fade out when cursor stops (after 1.5 seconds of no movement)
-                const timeSinceMove = Date.now() - lastMoveTime;
-                if (timeSinceMove > 1500 && isMoving) {
-                    isMoving = false;
-                    // Start gradual fade
-                    gradient.style.transition = 'opacity 5s ease-out, width 0.3s ease, height 0.3s ease';
-                    gradient.classList.remove('visible');
-                    gradient.classList.remove('moving');
-                } else if (timeSinceMove <= 1500 && !isMoving) {
-                    // Reset transition when moving again
-                    gradient.style.transition = '';
-                }
-                
-                // Magnetic attraction to interactive elements
-                const interactiveElements = getInteractiveElements();
-                let magneticX = mouseX;
-                let magneticY = mouseY;
-                let closestDistance = Infinity;
-                let closestElement = null;
-
-                interactiveElements.forEach(element => {
-                    const center = getElementCenter(element);
-                    const distance = Math.sqrt(
-                        Math.pow(mouseX - center.x, 2) + 
-                        Math.pow(mouseY - center.y, 2)
-                    );
-                    
-                    // Magnetic radius - adjust for stronger/weaker effect
-                    const magneticRadius = Math.max(center.width, center.height) * 1.5;
-                    
-                    if (distance < magneticRadius && distance < closestDistance) {
-                        closestDistance = distance;
-                        closestElement = center;
-                    }
-                });
-
-                // Apply magnetic pull if near an interactive element
-                if (closestElement) {
-                    const pullStrength = 1 - (closestDistance / (Math.max(closestElement.width, closestElement.height) * 1.5));
-                    const pullAmount = pullStrength * 0.3; // Adjust for stronger/weaker pull
-                    
-                    magneticX = mouseX + (closestElement.x - mouseX) * pullAmount;
-                    magneticY = mouseY + (closestElement.y - mouseY) * pullAmount;
-                } else {
-                    magneticX = mouseX;
-                    magneticY = mouseY;
-                }
-
-                // Smooth trailing effect with magnetic influence
-                targetX = magneticX;
-                targetY = magneticY;
-                
-                gradientX += (targetX - gradientX) * 0.15;
-                gradientY += (targetY - gradientY) * 0.15;
-
-                gradient.style.left = gradientX + 'px';
-                gradient.style.top = gradientY + 'px';
-
-                requestAnimationFrame(animate);
-            };
-
-            document.addEventListener('mousemove', updateMouse);
-            document.addEventListener('mouseover', checkHover);
-            document.addEventListener('mouseout', checkHover);
-            
-            // Start animation
-            animate();
-        })();
     </script>
 </body>
 </html>
