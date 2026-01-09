@@ -8,8 +8,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=11">
     <style>
+        /* Ensure default cursor on life page */
+        body, * {
+            cursor: default !important;
+        }
+        
+        a, button, .dark-mode-toggle, .nav-icon, .gallery-control, .gallery-arrow {
+            cursor: pointer !important;
+        }
         /* Dark mode toggle button styles */
         .dark-mode-toggle {
             position: fixed;
@@ -47,16 +55,117 @@
             transition: transform 0.3s ease;
         }
 
-        /* Fluid cursor canvas */
-        #fluid-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+        /* Navigation banner icons */
+        #seasonal-banner-decorations .nav-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.03);
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        #seasonal-banner-decorations .nav-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            transition: all 0.3s ease;
+        }
+
+        #seasonal-banner-decorations .nav-icon:hover {
+            color: #3b82f6;
+            background: rgba(59, 130, 246, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        #seasonal-banner-decorations .nav-icon:hover svg {
+            stroke: #3b82f6;
+        }
+
+        #seasonal-banner-decorations .nav-icon::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+            opacity: 0;
             pointer-events: none;
-            z-index: 9999;
-            display: block;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        #seasonal-banner-decorations .nav-icon::before {
+            content: '';
+            position: absolute;
+            bottom: 52px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        #seasonal-banner-decorations .nav-icon:hover::after,
+        #seasonal-banner-decorations .nav-icon:hover::before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        [data-theme="dark"] #seasonal-banner-decorations {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08)),
+                        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.02) 2px, rgba(255, 255, 255, 0.02) 4px),
+                        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 255, 255, 0.02) 2px, rgba(255, 255, 255, 0.02) 4px);
+            background-size: 100% 100%, 8px 8px, 8px 8px;
+            border-top: 2px solid rgba(96, 165, 250, 0.2);
+            border-bottom: 2px solid rgba(96, 165, 250, 0.2);
+            box-shadow: 0 4px 25px rgba(59, 130, 246, 0.3), 0 2px 15px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] #seasonal-banner-decorations .nav-icon {
+            color: #b0b0b0;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        [data-theme="dark"] #seasonal-banner-decorations .nav-icon:hover {
+            color: #60a5fa;
+            background: rgba(96, 165, 250, 0.2);
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.4);
+        }
+
+        [data-theme="dark"] #seasonal-banner-decorations .nav-icon:hover svg {
+            stroke: #60a5fa;
+        }
+
+        [data-theme="dark"] #seasonal-banner-decorations .nav-icon::after {
+            background: rgba(255, 255, 255, 0.95);
+            color: #000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="dark"] #seasonal-banner-decorations .nav-icon::before {
+            border-top-color: rgba(255, 255, 255, 0.95);
         }
 
         /* Photo gallery styles */
@@ -173,32 +282,60 @@
             margin-bottom: 80px;
             background: #fff;
             border: 1px solid #e5e5e5;
-            border-radius: 12px;
-            padding: 32px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1), 0 2px 10px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gym-tracker::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.03), rgba(139, 92, 246, 0.02));
+            border-radius: 16px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .gym-tracker > * {
+            position: relative;
+            z-index: 1;
         }
 
         [data-theme="dark"] .gym-tracker {
             background: #1a1a1a;
             border: 1px solid #2a2a2a;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 25px rgba(59, 130, 246, 0.2), 0 2px 15px rgba(139, 92, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        [data-theme="dark"] .gym-tracker::before {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.05));
         }
 
         .gym-tracker-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 700;
             color: #000;
             margin-bottom: 8px;
             text-transform: lowercase;
             text-align: center;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         [data-theme="dark"] .gym-tracker-title {
             color: #ededed;
+            text-shadow: 0 2px 8px rgba(96, 165, 250, 0.2);
         }
 
         .gym-tracker-subtitle {
@@ -234,16 +371,18 @@
         .gym-grid {
             display: grid;
             grid-template-columns: repeat(31, 1fr);
-            gap: 3px;
-            padding: 12px;
+            gap: 4px;
+            padding: 16px;
             background: #f9f9f9;
-            border-radius: 8px;
+            border-radius: 10px;
             border: 1px solid #e5e5e5;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
         }
 
         [data-theme="dark"] .gym-grid {
             background: #161b22;
             border: 1px solid #2a2a2a;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .gym-day {
@@ -265,10 +404,22 @@
 
         .gym-day.visited {
             background: #40c463;
+            box-shadow: 0 0 8px rgba(64, 196, 99, 0.4), 0 2px 4px rgba(64, 196, 99, 0.2);
+            transition: all 0.3s ease;
         }
 
         .gym-day.visited:hover {
             background: #2ea043;
+            box-shadow: 0 0 12px rgba(64, 196, 99, 0.6), 0 4px 8px rgba(64, 196, 99, 0.4);
+            transform: scale(1.4);
+        }
+
+        [data-theme="dark"] .gym-day.visited {
+            box-shadow: 0 0 10px rgba(64, 196, 99, 0.5), 0 2px 6px rgba(64, 196, 99, 0.3);
+        }
+
+        [data-theme="dark"] .gym-day.visited:hover {
+            box-shadow: 0 0 16px rgba(64, 196, 99, 0.7), 0 4px 10px rgba(64, 196, 99, 0.5);
         }
 
         .gym-legend {
@@ -321,13 +472,7 @@
         </svg>
     </button>
 
-    <nav class="sidebar">
-        <a href="index.html">home</a>
-        <a href="index.html#about">about</a>
-        <a href="index.html#experience">experience</a>
-        <a href="index.html#projects">projects</a>
-        <a href="life.html">life</a>
-    </nav>
+
 
     <div class="container">
         <header>
@@ -382,6 +527,16 @@
                     <span>gym visit</span>
                 </div>
             </div>
+        </div>
+
+        <!-- Back to Home Link -->
+        <div style="max-width: 800px; margin-left: auto; margin-right: auto; margin-top: 24px; text-align: left;">
+            <a href="index.html" class="back-to-home-link">
+                <svg width="28" height="20" viewBox="0 0 32 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M24 10H4M10 18L2 10l8-8"/>
+                </svg>
+                <span>back to home</span>
+            </a>
         </div>
     </div>
 
@@ -568,9 +723,48 @@
         })();
     </script>
     
-    <!-- Fluid cursor canvas -->
-    <canvas id="fluid-cursor"></canvas>
-    <script src="fluid-cursor.js"></script>
+    
+    <style>
+        .back-to-home-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: #666;
+            text-decoration: none;
+            font-size: 18px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+        .back-to-home-link span {
+            border-bottom: 1px solid currentColor;
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+        .back-to-home-link:hover {
+            color: #3b82f6;
+        }
+        .back-to-home-link:hover span {
+            border-bottom-color: #3b82f6;
+        }
+        [data-theme="dark"] .back-to-home-link {
+            color: #b0b0b0;
+        }
+        [data-theme="dark"] .back-to-home-link span {
+            border-bottom-color: #b0b0b0;
+        }
+        [data-theme="dark"] .back-to-home-link:hover {
+            color: #60a5fa;
+        }
+        [data-theme="dark"] .back-to-home-link:hover span {
+            border-bottom-color: #60a5fa;
+        }
+        .back-to-home-link svg {
+            flex-shrink: 0;
+        }
+    </style>
+    
 </body>
 </html>
 

@@ -17,7 +17,7 @@
         const PRESSURE = 0.1;
         const PRESSURE_ITERATIONS = 20;
         const CURL = 2;  // Reduced from 3 - less curl, more subtle
-        const SPLAT_RADIUS = 0.25;  // Reduced from 0.35 - smaller area
+        const SPLAT_RADIUS = 0.15;  // Reduced from 0.25 - much smaller area, less distracting
         const SPLAT_FORCE = 4000;  // Reduced from 6000 - less intense
         const SHADING = true;
         const COLOR_UPDATE_SPEED = 10;

@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=17">
     <style>
         /* Dark mode toggle button styles */
         .dark-mode-toggle {
@@ -51,16 +51,6 @@
         }
 
         /* Fluid cursor canvas */
-        #fluid-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 9999;
-            display: block;
-        }
     </style>
     <style id="seasonal-inline-styles"></style>
 </head>
@@ -75,12 +65,6 @@
         </svg>
     </button>
 
-    <nav class="sidebar">
-        <a href="#about">about</a>
-        <a href="#experience">experience</a>
-        <a href="#projects">projects</a>
-        <a href="life.html">life</a>
-    </nav>
 
     <div class="container">
         <header>
@@ -104,7 +88,7 @@
                 <div class="item-header">
                     <div class="title-with-logo">
                         <img src="images/orbital.png?v=3" alt="UW Orbital" class="company-logo">
-                        <h3>software developer — <a href="https://www.uworbital.com" target="_blank">uw orbital</a></h3>
+                        <h3><a href="https://www.uworbital.com" target="_blank" class="experience-link">software developer — uw orbital</a></h3>
                     </div>
                     <span class="period">sep 2025 - present</span>
                 </div>
@@ -115,7 +99,7 @@
                 <div class="item-header">
                     <div class="title-with-logo">
                         <img src="images/hands.png?v=3" alt="Hands" class="company-logo">
-                        <h3>founding engineer — <a href="https://handsforu.com" target="_blank">hands</a></h3>
+                        <h3><a href="https://handsforu.com" target="_blank" class="experience-link">founding engineer — hands</a></h3>
                     </div>
                     <span class="period">sep 2025 - nov 2025</span>
                 </div>
@@ -126,7 +110,7 @@
                 <div class="item-header">
                     <div class="title-with-logo">
                         <img src="images/jags.png?v=3" alt="Jags IT" class="company-logo">
-                        <h3>software developer — <a href="https://jagsconsulting.ca" target="_blank">jags it consulting</a></h3>
+                        <h3><a href="https://jagsconsulting.ca" target="_blank" class="experience-link">software developer — jags it consulting</a></h3>
                     </div>
                     <span class="period">jan 2024 - apr 2024</span>
                 </div>
@@ -241,7 +225,7 @@
                     <span class="tech-tag">Cloud</span>
                     <span class="tech-tag">AZ-900</span>
                 </div>
-            </div>
+                </div>
             </div>
         </section>
 
@@ -277,10 +261,6 @@
         </footer>
     </div>
 
-    <!-- Fluid cursor canvas -->
-    <canvas id="fluid-cursor"></canvas>
-
-    <script src="fluid-cursor.js"></script>
     <script>
         // Seasonal Theme Detection and Application
         (function() {
@@ -482,63 +462,235 @@
                 document.body.className = document.body.className.replace(/theme-\w+/g, '');
                 document.body.className += ' theme-' + theme.name;
                 
-                // Add animated banner with seasonal decorations
+                // Add elegant pixelated pattern banner
                 const existingDecorations = document.getElementById('seasonal-banner-decorations');
                 if (existingDecorations) {
                     existingDecorations.remove();
                 }
                 
-                const decorationsContainer = document.createElement('div');
-                decorationsContainer.id = 'seasonal-banner-decorations';
+                const accentContainer = document.createElement('div');
+                accentContainer.id = 'seasonal-banner-decorations';
                 
-                const decorations = theme.decorations || '✨';
-                const decorArray = decorations.split(' ').filter(d => d.trim());
+                // Create elegant pixelated pattern banner
+                const accentStyle = document.createElement('style');
+                accentStyle.id = 'seasonal-banner-style';
                 
-                // Create scrolling banner effect
-                const bannerStyle = document.createElement('style');
-                bannerStyle.id = 'seasonal-banner-style';
+                // Convert hex to rgba for banner
+                const bgColor1 = primaryRgb ? `rgba(${primaryRgb.r}, ${primaryRgb.g}, ${primaryRgb.b}, 0.03)` : 'rgba(59, 130, 246, 0.03)';
+                const bgColor2 = secondaryRgb ? `rgba(${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}, 0.03)` : 'rgba(139, 92, 246, 0.03)';
+                const borderColor1 = primaryRgb ? `rgba(${primaryRgb.r}, ${primaryRgb.g}, ${primaryRgb.b}, 0.1)` : 'rgba(59, 130, 246, 0.1)';
                 
-                // Convert hex to rgba for background
-                const bgPrimary = primaryRgb ? `rgba(${primaryRgb.r}, ${primaryRgb.g}, ${primaryRgb.b}, 0.08)` : 'rgba(59, 130, 246, 0.08)';
-                const bgSecondary = secondaryRgb ? `rgba(${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}, 0.08)` : 'rgba(139, 92, 246, 0.08)';
-                const borderColor = primaryRgb ? `rgba(${primaryRgb.r}, ${primaryRgb.g}, ${primaryRgb.b}, 0.2)` : 'rgba(59, 130, 246, 0.2)';
+                // Create subtle pixelated pattern using CSS
+                const pixelPattern = `
+                    repeating-linear-gradient(
+                        0deg,
+                        transparent,
+                        transparent 2px,
+                        ${bgColor1} 2px,
+                        ${bgColor1} 4px
+                    ),
+                    repeating-linear-gradient(
+                        90deg,
+                        transparent,
+                        transparent 2px,
+                        ${bgColor2} 2px,
+                        ${bgColor2} 4px
+                    )
+                `;
                 
-                bannerStyle.textContent = `
+                accentStyle.textContent = `
                     #seasonal-banner-decorations {
                         position: relative;
-                        width: 100%;
-                        height: 50px;
-                        background: linear-gradient(90deg, ${bgPrimary}, ${bgSecondary}, ${bgPrimary});
-                        border-bottom: 1px solid ${borderColor};
-                        overflow: hidden;
+                        width: fit-content;
+                        height: auto;
+                        background: linear-gradient(90deg, ${bgColor1}, ${bgColor2}, ${bgColor1}),
+                                    ${pixelPattern};
+                        background-size: 100% 100%, 8px 8px;
+                        background-blend-mode: overlay;
+                        border-top: 2px solid ${borderColor1};
+                        border-bottom: 2px solid ${borderColor1};
+                        margin: 0 auto;
+                        opacity: 1;
+                        pointer-events: auto;
                         z-index: 1;
-                        pointer-events: none;
-                        margin-bottom: 20px;
+                        position: relative;
+                        overflow: visible;
+                        box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15), 0 2px 10px rgba(139, 92, 246, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                        backdrop-filter: blur(10px);
+                        border-radius: 12px;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 32px;
+                        padding: 12px 16px;
                     }
                     
-                    .seasonal-scroll {
+                    #seasonal-banner-decorations .nav-icon {
+                        position: relative;
                         display: flex;
                         align-items: center;
-                        height: 100%;
-                        animation: scrollBanner 20s linear infinite;
+                        justify-content: center;
+                        width: 48px;
+                        height: 48px;
+                        border-radius: 12px;
+                        color: #666;
+                        text-decoration: none;
+                        transition: all 0.3s ease;
+                        background: rgba(0, 0, 0, 0.03);
+                        z-index: 10;
+                        pointer-events: auto;
+                    }
+                    
+                    #seasonal-banner-decorations .nav-icon svg {
+                        width: 24px;
+                        height: 24px;
+                        stroke: currentColor;
+                        transition: all 0.3s ease;
+                    }
+                    
+                    #seasonal-banner-decorations .nav-icon:hover {
+                        color: #3b82f6;
+                        background: rgba(59, 130, 246, 0.15);
+                        transform: translateY(-2px);
+                        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+                    }
+                    
+                    #seasonal-banner-decorations .nav-icon:hover svg {
+                        stroke: #3b82f6;
+                    }
+                    
+                    #seasonal-banner-decorations .nav-icon::after {
+                        content: attr(data-tooltip);
+                        position: absolute;
+                        bottom: 60px;
+                        left: 50%;
+                        transform: translateX(-50%) translateY(10px);
+                        background: rgba(0, 0, 0, 0.9);
+                        color: #fff;
+                        padding: 8px 12px;
+                        border-radius: 6px;
+                        font-size: 13px;
+                        font-family: 'Inter', sans-serif;
                         white-space: nowrap;
-                        width: fit-content;
+                        opacity: 0;
+                        pointer-events: none;
+                        transition: all 0.3s ease;
+                        z-index: 1000;
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
                     }
                     
-                    .seasonal-scroll span {
-                        font-size: 28px;
-                        margin: 0 30px;
-                        opacity: 0.5;
-                        display: inline-block;
+                    #seasonal-banner-decorations .nav-icon::before {
+                        content: '';
+                        position: absolute;
+                        bottom: 52px;
+                        left: 50%;
+                        transform: translateX(-50%) translateY(10px);
+                        width: 0;
+                        height: 0;
+                        border-left: 6px solid transparent;
+                        border-right: 6px solid transparent;
+                        border-top: 6px solid rgba(0, 0, 0, 0.9);
+                        opacity: 0;
+                        pointer-events: none;
+                        transition: all 0.3s ease;
+                        z-index: 1001;
                     }
                     
-                    @keyframes scrollBanner {
-                        0% {
-                            transform: translateX(0);
-                        }
-                        100% {
-                            transform: translateX(-50%);
-                        }
+                    #seasonal-banner-decorations .nav-icon:hover::after,
+                    #seasonal-banner-decorations .nav-icon:hover::before {
+                        opacity: 1;
+                        transform: translateX(-50%) translateY(0);
+                    }
+                    
+                    [data-theme="dark"] #seasonal-banner-decorations .nav-icon {
+                        color: #b0b0b0;
+                        background: rgba(255, 255, 255, 0.05);
+                    }
+                    
+                    [data-theme="dark"] #seasonal-banner-decorations .nav-icon:hover {
+                        color: #60a5fa;
+                        background: rgba(96, 165, 250, 0.2);
+                        box-shadow: 0 4px 12px rgba(96, 165, 250, 0.4);
+                    }
+                    
+                    [data-theme="dark"] #seasonal-banner-decorations .nav-icon:hover svg {
+                        stroke: #60a5fa;
+                    }
+                    
+                    [data-theme="dark"] #seasonal-banner-decorations .nav-icon::after {
+                        background: rgba(255, 255, 255, 0.95);
+                        color: #000;
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+                    }
+                    
+                    [data-theme="dark"] #seasonal-banner-decorations .nav-icon::before {
+                        border-top-color: rgba(255, 255, 255, 0.95);
+                    }
+                    
+                    #seasonal-banner-decorations::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), rgba(59, 130, 246, 0.1), rgba(255, 255, 255, 0.15), transparent);
+                        pointer-events: none;
+                        border-radius: 8px;
+                    }
+                    
+                    #seasonal-banner-decorations::after {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background-image: 
+                            repeating-linear-gradient(
+                                90deg,
+                                transparent,
+                                transparent 3px,
+                                rgba(0, 0, 0, 0.01) 3px,
+                                rgba(0, 0, 0, 0.01) 4px
+                            ),
+                            repeating-linear-gradient(
+                                0deg,
+                                transparent,
+                                transparent 3px,
+                                rgba(0, 0, 0, 0.01) 3px,
+                                rgba(0, 0, 0, 0.01) 4px
+                            );
+                        pointer-events: none;
+                    }
+                    
+                    [data-theme="dark"] #seasonal-banner-decorations {
+                        opacity: 1;
+                        background: linear-gradient(90deg, ${bgColor1}, ${bgColor2}, ${bgColor1}),
+                                    ${pixelPattern};
+                        box-shadow: 0 4px 25px rgba(59, 130, 246, 0.3), 0 2px 15px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+                    }
+                    
+                    [data-theme="dark"] #seasonal-banner-decorations::before {
+                        background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.2), rgba(139, 92, 246, 0.15), rgba(96, 165, 250, 0.2), transparent);
+                    }
+                    
+                    [data-theme="dark"] #seasonal-banner-decorations::after {
+                        background-image: 
+                            repeating-linear-gradient(
+                                90deg,
+                                transparent,
+                                transparent 3px,
+                                rgba(255, 255, 255, 0.01) 3px,
+                                rgba(255, 255, 255, 0.01) 4px
+                            ),
+                            repeating-linear-gradient(
+                                0deg,
+                                transparent,
+                                transparent 3px,
+                                rgba(255, 255, 255, 0.01) 3px,
+                                rgba(255, 255, 255, 0.01) 4px
+                            );
                     }
                 `;
                 
@@ -547,23 +699,60 @@
                 if (oldBannerStyle) {
                     oldBannerStyle.remove();
                 }
-                document.head.appendChild(bannerStyle);
+                document.head.appendChild(accentStyle);
                 
-                // Create duplicate content for seamless loop
-                const scrollContent = document.createElement('div');
-                scrollContent.className = 'seasonal-scroll';
-                const decorString = decorArray.join(' ').repeat(10); // Repeat for seamless scroll
-                scrollContent.innerHTML = decorArray.map(dec => `<span>${dec}</span>`).join('').repeat(2);
+                // Add navigation icons to banner
+                const navIcons = `
+                    <a href="#about" class="nav-icon" data-tooltip="About">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </a>
+                    <a href="#experience" class="nav-icon" data-tooltip="Experience">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                    </a>
+                    <a href="#projects" class="nav-icon" data-tooltip="Projects">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                            <rect x="6" y="11" width="3" height="7"/>
+                            <rect x="10.5" y="9" width="3" height="9"/>
+                            <rect x="15" y="13" width="3" height="5"/>
+                        </svg>
+                    </a>
+                    <a href="life.html" class="nav-icon" data-tooltip="Life">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                            <polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                    </a>
+                    <a href="Tanay Jagadeesh Resume.pdf" download="Tanay Jagadeesh Resume.pdf" class="nav-icon" data-tooltip="Resume">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </a>
+                `;
+                accentContainer.innerHTML = navIcons;
                 
-                decorationsContainer.appendChild(scrollContent);
-                
-                // Insert banner right before the header (above Tanay Jagadeesh)
+                // Insert elegant accent line right before the header
                 const container = document.querySelector('.container');
                 const header = document.querySelector('header');
                 if (container && header) {
-                    container.insertBefore(decorationsContainer, header);
+                    // Wrap banner in a centered container to align with header
+                    const bannerWrapper = document.createElement('div');
+                    bannerWrapper.style.cssText = 'width: 100%; text-align: center; margin-bottom: 40px;';
+                    bannerWrapper.appendChild(accentContainer);
+                    container.insertBefore(bannerWrapper, header);
                 } else {
-                    document.body.appendChild(decorationsContainer);
+                    document.body.appendChild(accentContainer);
                 }
                 
                 // Debug: log the theme
