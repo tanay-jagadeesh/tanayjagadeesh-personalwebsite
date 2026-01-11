@@ -192,6 +192,25 @@ body::before {
     opacity: 0.8;
 }
 
+[data-theme="dark"] .sephira-link {
+    text-shadow: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+[data-theme="dark"] .sephira-link:hover {
+    text-shadow: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border: none !important;
+    color: inherit !important;
+}
+
+[data-theme="dark"] .sephira-link::after {
+    background-color: currentColor;
+}
+
 /* Dark mode - Project Cards */
 [data-theme="dark"] .project-card {
     background: linear-gradient(135deg, rgba(26, 26, 26, 0.98) 0%, rgba(20, 20, 20, 0.95) 100%);
@@ -677,6 +696,22 @@ header a,
     gap: 6px;
     position: relative;
     text-decoration: none;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
+}
+
+.sephira-link:hover {
+    text-shadow: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border: none !important;
+    transform: none !important;
+    color: inherit !important;
 }
 
 .sephira-link::after {
