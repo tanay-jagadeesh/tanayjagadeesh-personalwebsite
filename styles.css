@@ -51,10 +51,12 @@ html {
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 15px;
-    line-height: 1.7;
-    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #1a1a1a;
+    font-weight: 400;
+    letter-spacing: -0.01em;
     background: 
         radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
         radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
@@ -511,20 +513,22 @@ header {
 }
 
 header h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 32px;
-    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
     color: #000;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.04em;
     margin-bottom: 8px;
+    line-height: 1.2;
 }
 
 .subtitle {
-    font-family: 'Poppins', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
     font-size: 15px;
     color: #666;
     font-weight: 400;
-    letter-spacing: 0.3px;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
 }
 
 .subtitle-logo {
@@ -545,21 +549,22 @@ section {
 }
 
 section h2 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 18px;
     font-weight: 600;
     color: #000;
     margin-bottom: 24px;
     text-transform: lowercase;
-    letter-spacing: 0.5px;
+    letter-spacing: -0.02em;
 }
 
 section h3 {
-    font-family: 'Poppins', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     color: #000;
     margin-bottom: 4px;
+    letter-spacing: -0.01em;
 }
 
 section p {
@@ -770,12 +775,13 @@ header a:hover,
 
 .project-header h3 {
     margin: 0;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.4;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.3;
     flex: 1;
     color: #1a1a1a;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
     background: linear-gradient(135deg, #1a1a1a 0%, #3b3b3b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -827,12 +833,251 @@ header a:hover,
 .project-description {
     color: #555;
     font-size: 15px;
-    line-height: 1.75;
+    line-height: 1.7;
     margin-bottom: 24px;
     flex-grow: 1;
     position: relative;
     z-index: 1;
     transition: color 0.3s ease;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+.project-video-container {
+    width: 100%;
+    margin-bottom: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    background: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.project-card:hover .project-video-container {
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+    transform: translateY(-2px);
+}
+
+.project-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    background: #000;
+}
+
+[data-theme="dark"] .project-video-container {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .project-card:hover .project-video-container {
+    box-shadow: 0 8px 24px rgba(96, 165, 250, 0.3);
+}
+
+/* Featured Project Card - CodeClash */
+.project-card-featured {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(139, 92, 246, 0.03) 50%, rgba(59, 130, 246, 0.03) 100%);
+    border: 2px solid rgba(59, 130, 246, 0.2);
+    box-shadow: 
+        0 8px 32px rgba(59, 130, 246, 0.15),
+        0 4px 16px rgba(139, 92, 246, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -1px 0 rgba(59, 130, 246, 0.1);
+    position: relative;
+    overflow: visible;
+}
+
+.project-card-featured::before {
+    opacity: 1 !important;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        rgba(59, 130, 246, 0.8) 0%, 
+        rgba(139, 92, 246, 0.8) 25%,
+        rgba(59, 130, 246, 0.8) 50%,
+        rgba(139, 92, 246, 0.8) 75%,
+        rgba(59, 130, 246, 0.8) 100%);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+.project-card-featured::after {
+    background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+    opacity: 1;
+}
+
+.project-card-featured:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+        0 16px 48px rgba(59, 130, 246, 0.25),
+        0 8px 24px rgba(139, 92, 246, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        inset 0 -1px 0 rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+.featured-title {
+    display: inline-block;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.featured-badge {
+    display: inline-block;
+    margin-left: 12px;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #3b82f6;
+    text-transform: lowercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+
+.project-link-featured {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.project-link-featured:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 
+        0 6px 20px rgba(59, 130, 246, 0.4),
+        0 0 0 4px rgba(59, 130, 246, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.project-video-container-featured {
+    width: 100%;
+    margin-bottom: 24px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+    box-shadow: 
+        0 8px 32px rgba(59, 130, 246, 0.2),
+        0 4px 16px rgba(139, 92, 246, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(59, 130, 246, 0.15);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 1;
+}
+
+.project-card-featured:hover .project-video-container-featured {
+    box-shadow: 
+        0 12px 48px rgba(59, 130, 246, 0.3),
+        0 6px 24px rgba(139, 92, 246, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-4px) scale(1.01);
+}
+
+.project-video-featured {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 14px;
+    background: #000;
+}
+
+.tech-tag-featured {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(139, 92, 246, 0.12) 100%);
+    border-color: rgba(59, 130, 246, 0.25);
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.project-card-featured:hover .tech-tag-featured {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+    border-color: rgba(59, 130, 246, 0.4);
+    color: #3b82f6;
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .project-card-featured {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.08) 50%, rgba(59, 130, 246, 0.08) 100%);
+    border-color: rgba(96, 165, 250, 0.3);
+    box-shadow: 
+        0 8px 32px rgba(59, 130, 246, 0.25),
+        0 4px 16px rgba(139, 92, 246, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(96, 165, 250, 0.2);
+}
+
+[data-theme="dark"] .project-card-featured::before {
+    background: linear-gradient(90deg, 
+        rgba(96, 165, 250, 0.9) 0%, 
+        rgba(139, 92, 246, 0.9) 25%,
+        rgba(96, 165, 250, 0.9) 50%,
+        rgba(139, 92, 246, 0.9) 75%,
+        rgba(96, 165, 250, 0.9) 100%);
+}
+
+[data-theme="dark"] .project-card-featured:hover {
+    box-shadow: 
+        0 16px 48px rgba(59, 130, 246, 0.35),
+        0 8px 24px rgba(139, 92, 246, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 -1px 0 rgba(96, 165, 250, 0.3);
+    border-color: rgba(96, 165, 250, 0.5);
+}
+
+[data-theme="dark"] .featured-title {
+    background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+[data-theme="dark"] .featured-badge {
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+    border-color: rgba(96, 165, 250, 0.4);
+    color: #60a5fa;
+    box-shadow: 0 2px 8px rgba(96, 165, 250, 0.3);
+}
+
+[data-theme="dark"] .project-video-container-featured {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    border-color: rgba(96, 165, 250, 0.25);
+    box-shadow: 
+        0 8px 32px rgba(59, 130, 246, 0.3),
+        0 4px 16px rgba(139, 92, 246, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .project-card-featured:hover .project-video-container-featured {
+    box-shadow: 
+        0 12px 48px rgba(59, 130, 246, 0.4),
+        0 6px 24px rgba(139, 92, 246, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border-color: rgba(96, 165, 250, 0.4);
+}
+
+[data-theme="dark"] .tech-tag-featured {
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+    border-color: rgba(96, 165, 250, 0.3);
+    color: #93c5fd;
+}
+
+[data-theme="dark"] .project-card-featured:hover .tech-tag-featured {
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.25) 0%, rgba(139, 92, 246, 0.25) 100%);
+    border-color: rgba(96, 165, 250, 0.5);
+    color: #60a5fa;
 }
 
 .project-card:hover .project-description {
@@ -851,7 +1096,9 @@ header a:hover,
     padding: 8px 16px;
     border-radius: 20px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+    letter-spacing: -0.01em;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     border: 1px solid rgba(59, 130, 246, 0.15);
     position: relative;
