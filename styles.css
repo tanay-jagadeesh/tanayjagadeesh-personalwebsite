@@ -670,6 +670,41 @@ header a,
     transform: translateY(-1px);
 }
 
+/* Sephira link with logo and hover underline */
+.sephira-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    text-decoration: none;
+}
+
+.sephira-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+.sephira-link:hover::after {
+    width: 100%;
+}
+
+.sephira-logo {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+}
+
 section a:hover,
 section h3 a:hover,
 header a:hover,
