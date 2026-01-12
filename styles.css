@@ -1035,33 +1035,24 @@ header a:hover,
 .project-video-container-featured {
     width: 100%;
     margin-bottom: 24px;
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
     position: relative;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-    box-shadow: 
-        0 8px 32px rgba(59, 130, 246, 0.2),
-        0 4px 16px rgba(139, 92, 246, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(59, 130, 246, 0.15);
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: #000;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
     z-index: 1;
 }
 
 .project-card-featured:hover .project-video-container-featured {
-    box-shadow: 
-        0 12px 48px rgba(59, 130, 246, 0.3),
-        0 6px 24px rgba(139, 92, 246, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    border-color: rgba(59, 130, 246, 0.3);
-    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .project-video-featured {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 14px;
+    border-radius: 12px;
     background: #000;
 }
 
@@ -1122,20 +1113,12 @@ header a:hover,
 }
 
 [data-theme="dark"] .project-video-container-featured {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-    border-color: rgba(96, 165, 250, 0.25);
-    box-shadow: 
-        0 8px 32px rgba(59, 130, 246, 0.3),
-        0 4px 16px rgba(139, 92, 246, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    background: #000;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 [data-theme="dark"] .project-card-featured:hover .project-video-container-featured {
-    box-shadow: 
-        0 12px 48px rgba(59, 130, 246, 0.4),
-        0 6px 24px rgba(139, 92, 246, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    border-color: rgba(96, 165, 250, 0.4);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 [data-theme="dark"] .tech-tag-featured {
