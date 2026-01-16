@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { ContainerTextScroll } from '@/components/ui/container-text-scroll';
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
@@ -11,6 +12,7 @@ export default function Hero() {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <ContainerTextScroll>
       {/* Animated background gradient - seasonal */}
       <div className="absolute inset-0 seasonal-bg-gradient"></div>
 
@@ -55,6 +57,7 @@ export default function Hero() {
           </svg>
         </div>
       </div>
+      </ContainerTextScroll>
     </section>
   );
 }
