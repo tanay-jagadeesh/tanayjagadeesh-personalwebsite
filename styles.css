@@ -4,6 +4,158 @@
     box-sizing: border-box;
 }
 
+/* Elegant Floating Shapes Background */
+@keyframes shapeFloat {
+    0%, 100% { transform: translateY(0) rotate(var(--rotate)); }
+    50% { transform: translateY(15px) rotate(var(--rotate)); }
+}
+
+@keyframes shapeFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px) rotate(calc(var(--rotate) - 15deg));
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotate(var(--rotate));
+    }
+}
+
+.floating-shapes {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-shape {
+    position: absolute;
+    border-radius: 9999px;
+    backdrop-filter: blur(2px);
+    animation: shapeFadeIn 2.4s cubic-bezier(0.23, 0.86, 0.39, 0.96) forwards;
+    opacity: 0;
+}
+
+.floating-shape::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    animation: shapeFloat 12s ease-in-out infinite;
+}
+
+/* Light mode shapes - more visible */
+.shape-1 {
+    --rotate: 12deg;
+    width: 500px;
+    height: 120px;
+    left: -5%;
+    top: 18%;
+    animation-delay: 0.3s;
+}
+.shape-1::after {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.06), transparent);
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+.shape-2 {
+    --rotate: -15deg;
+    width: 400px;
+    height: 100px;
+    right: -3%;
+    top: 72%;
+    animation-delay: 0.5s;
+}
+.shape-2::after {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.05), transparent);
+    border: 2px solid rgba(0, 0, 0, 0.07);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+}
+
+.shape-3 {
+    --rotate: -8deg;
+    width: 280px;
+    height: 70px;
+    left: 8%;
+    bottom: 8%;
+    animation-delay: 0.4s;
+}
+.shape-3::after {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.045), transparent);
+    border: 2px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.035);
+}
+
+.shape-4 {
+    --rotate: 20deg;
+    width: 180px;
+    height: 50px;
+    right: 18%;
+    top: 12%;
+    animation-delay: 0.6s;
+}
+.shape-4::after {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.05), transparent);
+    border: 2px solid rgba(0, 0, 0, 0.07);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+}
+
+.shape-5 {
+    --rotate: -25deg;
+    width: 140px;
+    height: 38px;
+    left: 22%;
+    top: 6%;
+    animation-delay: 0.7s;
+}
+.shape-5::after {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.04), transparent);
+    border: 2px solid rgba(0, 0, 0, 0.055);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
+}
+
+/* Dark mode shapes */
+[data-theme="dark"] .shape-1::after {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.04), transparent);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.02);
+}
+
+[data-theme="dark"] .shape-2::after {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.035), transparent);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.015);
+}
+
+[data-theme="dark"] .shape-3::after {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.03), transparent);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.01);
+}
+
+[data-theme="dark"] .shape-4::after {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.035), transparent);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.015);
+}
+
+[data-theme="dark"] .shape-5::after {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.025), transparent);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.01);
+}
+
+/* Responsive adjustments for shapes */
+@media (max-width: 768px) {
+    .shape-1 { width: 300px; height: 75px; left: -10%; }
+    .shape-2 { width: 250px; height: 65px; right: -8%; }
+    .shape-3 { width: 180px; height: 48px; }
+    .shape-4 { width: 120px; height: 35px; }
+    .shape-5 { width: 90px; height: 26px; }
+}
+
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 100px; /* Account for any fixed elements */
