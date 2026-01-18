@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=26">
+    <link rel="stylesheet" href="styles.css?v=28">
     <style>
         /* Dark mode toggle button styles */
         .dark-mode-toggle {
@@ -166,11 +166,13 @@
                     </div>
                 </div>
                 <p class="project-description">real-time 1v1 coding competition platform where developers race to solve algorithmic problems. built with instant matching, live opponent status, and ai-powered hints. reached 100+ users in 2 hours after launch. fully deployed and shipping.</p>
-                <div class="project-video-container-featured">
-                    <video class="project-video-featured" autoplay muted loop playsinline controls preload="auto">
-                        <source src="videos/11.01.2026_14.45.11_REC.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                <div class="scroll-video-wrapper">
+                    <div class="project-video-container-featured" id="scrollVideo">
+                        <video class="project-video-featured" autoplay muted loop playsinline controls preload="auto">
+                            <source src="videos/11.01.2026_14.45.11_REC.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
                 </div>
                 <div class="tech-stack">
                     <span class="tech-tag tech-tag-featured">Next.js</span>
@@ -966,6 +968,67 @@
                     }
                 });
             }
+        })();
+
+        // Scroll-based 3D transform for featured video
+        (function() {
+            const video = document.getElementById('scrollVideo');
+            if (!video) return;
+
+            const isMobile = window.innerWidth <= 768;
+
+            function lerp(start, end, t) {
+                return start + (end - start) * t;
+            }
+
+            function updateTransform() {
+                const rect = video.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+
+                // Calculate scroll progress (0 to 1) based on element position
+                const elementCenter = rect.top + rect.height / 2;
+                const viewportCenter = windowHeight / 2;
+                const distanceFromCenter = elementCenter - viewportCenter;
+                const maxDistance = windowHeight;
+
+                // Progress: 0 when element enters from bottom, 1 when at center/past
+                let progress = 1 - Math.max(0, Math.min(1, (distanceFromCenter + maxDistance / 2) / maxDistance));
+
+                // Apply easing
+                progress = progress * progress * (3 - 2 * progress);
+
+                // Calculate transforms based on progress
+                const rotateX = lerp(15, 0, progress);
+                const scale = isMobile ? lerp(0.9, 1, progress) : lerp(0.95, 1, progress);
+
+                // Apply transforms
+                video.style.transform = `rotateX(${rotateX}deg) scale(${scale})`;
+
+                // Dynamic shadow based on rotation
+                const shadowIntensity = lerp(0.15, 0.08, progress);
+                const shadowBlur = lerp(40, 32, progress);
+                video.style.boxShadow = `0 0 0 1px rgba(0, 0, 0, 0.06), 0 ${Math.round(8 + rotateX)}px ${shadowBlur}px rgba(0, 0, 0, ${shadowIntensity})`;
+            }
+
+            // Throttled scroll handler
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        updateTransform();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            // Initial call
+            updateTransform();
+
+            // Update on resize
+            window.addEventListener('resize', () => {
+                updateTransform();
+            }, { passive: true });
         })();
 
     </script>
